@@ -83,7 +83,9 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'timezone' => 'Asia/Jakarta',
+    'locale' => 'id',
+    'faker_locale' => 'id_ID',
 
     /*
     |--------------------------------------------------------------------------
@@ -183,6 +185,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        "currency" => App\Helpers\Currency::class,
+        "ApiResponse" => App\Helpers\ApiResponse::class,
     ])->toArray(),
 
 ];
