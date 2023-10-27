@@ -45,7 +45,8 @@
 <x-modal :id="'modal-update-data-pengeluaran'" :title="'Edit Data Pengeluaran'" :headerClass="'bg-warning'" :formId="'form-update-data-pengeluaran'">
     <x-slot:body>
         <div class="form-group">
-            <input type="text" name="id" class="id" hidden>
+            <input type="text" id="user_id" name="user_id" hidden>
+            <input type="text" id="pengeluaran_id" name="pengeluaran_id" hidden>
         </div>
         <div class="form-group mb-3">
             <label for="tanggal_pengeluaran" class="form-label">Tanggal Pengeluaran</label>
@@ -84,6 +85,25 @@
         <button type="submit" class="btn btn-primary ms-1" id="simpan">
             <i class="bx bx-check d-block d-sm-none"></i>
             <span class="d-none d-sm-block">Simpan</span>
+        </button>
+    </x-slot:footer>
+</x-modal>
+{{-- Delete Modal --}}
+<x-modal :id="'modal-delete-data-pengeluaran'" :title="'Hapus Data Pengeluaran'" :headerClass="'bg-danger'" :formId="'form-delete-data-pengeluaran'">
+    <x-slot:body>
+        <p>Apakah anda ingin menghapus pengeluaran <strong><span id="kategori_pengeluaran"></span></strong>?</p>
+        <div class="form-group">
+            <input type="text" id="pengeluaran_id" name="pengeluaran_id" hidden>
+        </div>
+    </x-slot:body>
+    <x-slot:footer>
+        <button type="button" class="btn btn-light-secondary" id="batal" data-bs-dismiss="modal">
+            <i class="bx bx-x d-block d-sm-none"></i>
+            <span class="d-none d-sm-block">Batal</span>
+        </button>
+        <button type="submit" class="btn btn-danger ms-1" id="simpan">
+            <i class="bx bx-check d-block d-sm-none"></i>
+            <span class="d-none d-sm-block">Hapus</span>
         </button>
     </x-slot:footer>
 </x-modal>

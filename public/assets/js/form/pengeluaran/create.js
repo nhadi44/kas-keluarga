@@ -40,23 +40,10 @@ formPengeluaran.submit(function (e) {
             $("#table-data-pengeluaran").DataTable().ajax.reload();
             $("#modal-tambah-data-pengeluaran").modal("hide");
 
-            $.ajax({
-                url: "/dashboard/pengeluaran/get-saldo-by-user-id",
-                method: "POST",
-                dataType: "json",
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                    id: res.data.saldo.user_id,
-                },
-
-                success: function (response) {
-                    let sisa_saldo = formatRupiah(
-                        response.data.sisa_saldo.toString(),
-                        "Rp. "
-                    );
-                    $("#sisa_saldo_title").html(sisa_saldo);
-                },
-            });
+            refreshSaldo(
+                "/dashboard/pengeluaran/get-saldo-by-user-id",
+                res.data.saldo.user_id
+            );
         },
 
         error: function (err) {

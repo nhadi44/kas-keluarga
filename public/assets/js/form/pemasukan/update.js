@@ -28,6 +28,7 @@ updateForm.on("submit", function (e) {
                 .attr("disabled", true);
         },
         success: function (res) {
+            console.log(res);
             Swal.fire({
                 title: "Berhasil!",
                 text: "Data berhasil diupdate.",
@@ -37,6 +38,11 @@ updateForm.on("submit", function (e) {
 
             $("#table-manajemen-keuangan").DataTable().ajax.reload();
             $("#modal-edit-data-keuangan").modal("hide");
+
+            refreshSaldo(
+                "/dashboard/pemasukan/get-saldo-by-user-id",
+                res.data.saldo.user_id
+            );
         },
 
         error: function (res) {

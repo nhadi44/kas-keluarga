@@ -60,6 +60,13 @@ form.submit(function (e) {
             errMessage.password_confirm
                 ? password_confirmation.addClass("is-invalid")
                 : "";
+
+            Swal.fire({
+                title: "Error!",
+                text: errMessage,
+                icon: "error",
+                confirmButtonText: "Coba lagi",
+            });
         },
 
         complete: {

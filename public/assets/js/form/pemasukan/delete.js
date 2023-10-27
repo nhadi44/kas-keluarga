@@ -34,6 +34,11 @@ formDeletePemasukan.on("submit", function (e) {
 
             $("#table-manajemen-keuangan").DataTable().ajax.reload();
             $("#modal-delete-data-keuangan").modal("hide");
+
+            refreshSaldo(
+                "/dashboard/pemasukan/get-saldo-by-user-id",
+                res.data.saldo.user_id
+            );
         },
 
         error: function (err) {

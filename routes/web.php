@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\VerifyController;
@@ -26,8 +27,18 @@ Route::post('/register', [AuthController::class, 'registerProcess'])->name('regi
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout.index');
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password.index');
 
+Route::get("/", function () {
+    return redirect()->route("dashboard.index");
+});
+
+Route::prefix("auth")->middleware('auth')->group(function () {
+    Route::post('/change-password', [AuthController::class, 'changePassword'])->name('auth.change-password');
+});
+
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/diagram-pemasukan', [DashboardController::class, 'getDataDiagramPemasukan'])->name('dashboard.diagram-pemasukan');
+    Route::get('/diagram-pengeluaran', [DashboardController::class, 'getDataPiePengeluaran'])->name('dashboard.diagram-pengeluaran');
 
     Route::prefix('/pemasukan')->group(function () {
         Route::get('/', [PemasukanController::class, 'index'])->name('pemasukan.index');
@@ -44,5 +55,13 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::post('/get-data', [PengeluaranController::class, "getAll"])->name("pengeluaran.get-data");
         Route::post('/get-saldo-by-user-id', [PengeluaranController::class, "getSaldoByUserId"])->name("pengeluaran.get-saldo-by-user-id");
         Route::post('/store', [PengeluaranController::class, 'store'])->name('pengeluaran.store');
+        Route::post('/update', [PengeluaranController::class, 'update'])->name('pengeluaran.update');
+        Route::post('/delete', [PengeluaranController::class, 'delete'])->name('pengeluaran.delete');
+    });
+
+    Route::prefix("/laporan")->group(function () {
+        Route::prefix('/keuangan')->group(function () {
+            Route::get('/', [LaporanController::class, 'index'])->name('laporan.keuangan.index');
+        });
     });
 });

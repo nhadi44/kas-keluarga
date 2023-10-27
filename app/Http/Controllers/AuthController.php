@@ -30,7 +30,7 @@ class AuthController extends Controller
     {
         // create logic for if user 3 time login and fill wrong password, user will be locked for 1 minutes
 
-        
+
 
         return $this->authService->login($request->all());
     }
@@ -68,6 +68,37 @@ class AuthController extends Controller
         }
 
         return $this->authService->register($request);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validated = Validator::make(
+            $request->all(),
+            [
+                'password_lama' => 'required',
+                'password_baru' => 'required|min:8',
+            ],
+            [
+                'password_baru.required' => 'Password baru tidak boleh kosong',
+                'password_baru.min' => 'Password minimal 8 karakter',
+                'password_lama.required' => 'Password lama tidak boleh kosong'
+            ]
+        );
+
+        if ($validated->fails()) {
+            return ApiResponse::failed(422, $validated->messages(), $validated->errors()->first());
+        }
+
+        if (!Auth::attempt(['username' => Auth::user()->username, 'password' => $request->password_lama])) {
+            return ApiResponse::failed(401, 'Password lama salah');
+        }
+
+        // don't same with old password
+        if ($request->password_lama == $request->password_baru) {
+            return ApiResponse::failed(401, 'Password baru tidak boleh sama dengan password lama');
+        }
+
+        return $this->authService->changePassword($request->all());
     }
 
     public function logout()

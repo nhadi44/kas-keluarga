@@ -118,7 +118,14 @@ class PemasukanService
                 $pemasukan->save();
             }
 
-            return ApiResponse::success(200, 'Update Data Pemasukan', $saldoBaru);
+            $newJson = [
+                'saldo' => [
+                    'user_id' => $saldo->user_id,
+                ],
+                'pemasukan' => $pemasukan
+            ];
+
+            return ApiResponse::success(200, 'Update Data Pemasukan', $newJson);
         } catch (\Throwable $th) {
             return ApiResponse::failed(500, 'Internal Server Error', $th->getMessage());
         }
@@ -138,12 +145,6 @@ class PemasukanService
 
             $saldoBaru = $saldo->sisa_saldo - $pemasukan->nominal_pemasukan;
 
-            $newData = [
-                'sisa_saldo' => $saldo->sisa_saldo - $pemasukan->nominal_pemasukan,
-                'pemasukan' => $pemasukan->nominal_pemasukan,
-                'saldo_baru' => $saldoBaru
-            ];
-
             Saldo::create([
                 'sisa_saldo' => $saldoBaru,
                 'user_id' => auth()->user()->id
@@ -151,7 +152,12 @@ class PemasukanService
 
             $pemasukan->delete();
 
-            return ApiResponse::success(200, 'Delete Data Pemasukan', $newData);
+            $json = [
+                'saldo' => $saldo,
+                'pemasukan' => $pemasukan,
+            ];
+
+            return ApiResponse::success(200, 'Delete Data Pemasukan', $json);
         } catch (\Throwable $th) {
             return ApiResponse::failed(500, 'Internal Server Error', $th->getMessage());
         }

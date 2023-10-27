@@ -43,4 +43,26 @@ class AuthService
             return ApiResponse::failed(500, 'Terjadi kesalahan');
         }
     }
+
+    public function changePassword($data)
+    {
+        $newPassword = $data['password_baru'];
+
+
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->password = bcrypt($newPassword);
+            $user->save();
+
+            // create new session
+            Auth::attempt([
+                'username' => $user->username,
+                'password' => $newPassword
+            ]);
+        } catch (\Throwable $th) {
+            return ApiResponse::failed(500, 'Terjadi kesalahan');
+        }
+
+        return ApiResponse::success(200, 'Password berhasil diubah', $data);
+    }
 }

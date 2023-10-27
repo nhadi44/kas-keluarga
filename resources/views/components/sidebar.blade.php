@@ -2,7 +2,9 @@
      <div class="sidebar-header position-relative">
          <div class="d-flex justify-content-between align-items-center">
              <div class="logo">
-                 <a href="index.html"><img src="/assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
+                 <a href="{{ route('dashboard.index') }}" class="fs-5">
+                     Kas Keluarga
+                 </a>
              </div>
              <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -52,7 +54,7 @@
              <li class="sidebar-title">Manajemen</li>
 
              <li
-                 class="sidebar-item has-sub {{ request()->segment(2) == 'pemasukan' || 'pengeluaran' ? 'active' : '' }}">
+                 class="sidebar-item has-sub {{ (request()->segment(2) == 'pemasukan' ? 'active' : request()->segment(2) == 'pengeluaran') ? 'active' : '' }}">
                  <a href="#" class='sidebar-link'>
                      <i class="bi bi-currency-dollar"></i>
                      <span>Keuangan</span>
@@ -66,6 +68,14 @@
                      </li>
                  </ul>
              </li>
+
+             {{-- <li class="sidebar-title">Laporan</li>
+             <li class="sidebar-item {{ request()->routeIs('laporan.keuangan.index') ? 'active' : '' }}">
+                 <a href="{{ route('laporan.keuangan.index') }}" class='sidebar-link'>
+                     <i class="bi bi-bank2"></i>
+                     <span>Keuangan</span>
+                 </a>
+             </li> --}}
          </ul>
      </div>
  </div>

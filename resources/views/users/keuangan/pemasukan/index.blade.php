@@ -66,9 +66,9 @@
     <script src="/assets/js/helpers/currency.js"></script>
     <script src="/assets/js/custom/formatedCurrency.js"></script>
     <script src="/assets/js/helpers/formatRupiah.js"></script>
+    <script src="/assets/js/helpers/refreshSaldo.js"></script>
     <script>
         let sisaSaldoTitle = document.getElementById('sisa_saldo_title');
-        console.log(typeof sisaSaldoTitle.innerHTML)
         // sring to number
         let sisaSaldoNumber = sisaSaldoTitle.innerHTML = parseInt(sisaSaldoTitle.innerHTML);
         // format rupiah

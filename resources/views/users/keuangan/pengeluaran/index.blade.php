@@ -61,6 +61,9 @@
     <script src="/assets/js/helpers/currency.js"></script>
     <script src="/assets/js/custom/formatedCurrency.js"></script>
     <script src="/assets/js/form/pengeluaran/create.js"></script>
+    <script src="/assets/js/form/pengeluaran/update.js"></script>
+    <script src="/assets/js/form/pengeluaran/delete.js"></script>
+    <script src="/assets/js/helpers/refreshSaldo.js"></script>
     <script>
         let sisaSaldoTitle = document.getElementById('sisa_saldo_title');
         // sring to number

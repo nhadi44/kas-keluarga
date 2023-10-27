@@ -41,24 +41,10 @@ form.on("submit", function (e) {
                 $("#table-manajemen-keuangan").DataTable().ajax.reload();
                 $("#modal-tambah-data-pemasukan").modal("hide");
 
-                $.ajax({
-                    url: "/dashboard/pemasukan/get-saldo-by-user-id",
-                    method: "POST",
-                    dataType: "json",
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr("content"),
-                        id: res.data.saldo.user_id,
-                    },
-
-                    success: function (response) {
-                        console.log(response.data.sisa_saldo);
-                        let sisa_saldo = formatRupiah(
-                            response.data.sisa_saldo.toString(),
-                            "Rp. "
-                        );
-                        $("#sisa_saldo_title").html(sisa_saldo);
-                    },
-                });
+                refreshSaldo(
+                    "/dashboard/pemasukan/get-saldo-by-user-id",
+                    res.data.saldo.user_id
+                );
             }
         },
 

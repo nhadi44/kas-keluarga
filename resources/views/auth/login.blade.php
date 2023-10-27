@@ -7,7 +7,7 @@
                 <div class="auth-logo">
                     <a href="index.html" class="d-flex align-items-center gap-3">
                         <img src="/assets/icons/android-chrome-512x512.png" alt="Logo">
-                        <h3 class="text-white m-0">Kas Keluarga</h3>
+                        <h3 class="m-0">Kas Keluarga</h3>
                     </a>
                 </div>
                 <h1 class="auth-title">Masuk.</h1>

@@ -40,11 +40,22 @@ class PengeluaranController extends Controller
 
     public function getSaldoByUserId(Request $request)
     {
+        
         return $this->pengeluaranService->getSaldoByUserId($request->all());
     }
 
     public function store(Request $request)
     {
         return $this->pengeluaranService->store($request->all());
+    }
+
+    public function update(Request $request)
+    {
+        return $this->pengeluaranService->update($request->all());
+    }
+
+    public function delete(Request $request)
+    {
+        return $this->pengeluaranService->delete($request->all());
     }
 }
